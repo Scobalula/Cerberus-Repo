@@ -1,0 +1,17 @@
+UI Version:
+
+Simply drag and drop scripts onto the Script list or click the folder to load scripts,
+then you can double click scripts to load specific scripts, and double click functions
+to jump to them.
+
+If you'd like the clear loaded scripts or halt the current task, simply click the X.
+
+If you'd like save scripts, select scripts (CTRL+A to select all) from the Scripts list
+and click the disk to save them. Cerberus will then save each one into a folder in the same
+location as the exe.
+
+CLI Version:
+
+Simply drag and drop files or pass arguments using the command line. The Fast File extractor
+does not parse scripts that it exports automatically, so when you run Fast Files through it,
+you then need to go to the scripts and load them.
