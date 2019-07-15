@@ -1,5 +1,5 @@
 # Cerberus
-[![Releases](https://img.shields.io/github/downloads/Scobalula/Cerberus-Repo/total.svg)](https://github.com/Scobalula/Greyhound/releases) [![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://discord.gg/fGVpV39)
+[![Releases](https://img.shields.io/github/downloads/Scobalula/Cerberus-Repo/total.svg)](https://github.com/Scobalula/Cerberus-Repo/) [![Discord](https://img.shields.io/badge/chat-Discord-blue.svg)](https://discord.gg/fGVpV39)
 
 Cerberus is a GSC/CSC Decompiler for Call of Duty: Black Ops II/III. It's main purpose is to provide access to scripts that Treyarch did not provide in the Call of Duty: Black Ops III Mod Tools and to give greater insight into how Treyarch achieved certain things, undocumented APIs, etc.
 
@@ -24,19 +24,22 @@ If you find Cerberus useful I would appreciate it if you credited me, or if you 
 
 The latest version can be downloaded from the [Released](https://github.com/Scobalula/Cerberus-Repo/releases) section.
 
-By using Cerberus you are agreeing to the license terms included in the download and on the [License](https://github.com/Scobalula/Cerberus-Repo/releases) page.
+By using Cerberus you are agreeing to the license terms included in the download and on the [License](https://github.com/Scobalula/Cerberus-Repo/) page.
 
 Once downloaded you can either use the UI or CLI version and drag and drop/load scripts. In the UI version you can double click scripts to load them and click functions to jump to them in the decompiler/disassembly. Check the "HowToUse.txt" in the download for more info on UI shortcuts, etc.
 
 # Credits:
 
-* kokole and Nukem - Basics of how the VM works from their original gsc reader
+* kokole and Nukem - Basics of how the Bo2 VM works from their original gsc reader (which was a huge amount of help with Bo3's, so a big thanks goes to them for their work)
+* Master131 - Black Ops II Fast File Decompression Code
 
 # Limitations:
 
 As with any decompiler there are limitions to the output Cerberus provides.
 
 * Scripts must be dumped from a Fast File as the VM modifies the buffers. Currently only Black Ops III is supported by the built in CLI fast file extractor, for Black Ops II (which may be supported later) you can use other extractors such as master131's.
+
+* Some if/else/else if blocks might be incorrectly bundled. The if/else/else if resolver is basic and will be improved.
 
 * Some for loops may not be properly marked, or detected, but this is rare.
 
@@ -73,6 +76,10 @@ def compute_hash(value):
 * **How come some stuff is named var_49dbff, etc. but some stuff is named?**
 
 * As mentioned above Black Ops III hashes everything, a table has been built with all source gsc files I could find from CoD 4, 5, Bo1, and Bo3. Some stuff is not apart of this table.
+
+* **Some Black Ops III Scripts fail to even load?**
+
+* These rare scripts with a different magic are not supported, they're mostly mp map specific (like mp_mapname.gsc) that aren't really of much use.
 
 * **I compared the output from Cerberus to a script we have and some of it is different, etc?**
 
