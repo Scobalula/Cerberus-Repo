@@ -1,0 +1,4 @@
+[submodule "PhilLibX"]
+	path = PhilLibX
+	url = https://github.com/Scobalula/PhilLibX.git
+	branch = master

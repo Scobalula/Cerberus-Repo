@@ -1,0 +1,20 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+env:
+  -
+  - CONFIGURE_OPTS=--enable-64-bit-words
+
+install:
+  - if [ $TRAVIS_OS_NAME = linux ]; then sudo apt-get -y install libogg-dev; fi
+  - if [ $TRAVIS_OS_NAME = osx ]; then brew install libogg; fi
+
+script:
+  - ./autogen.sh && ./configure $CONFIGURE_OPTS && make && make check

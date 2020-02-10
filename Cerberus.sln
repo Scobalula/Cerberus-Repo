@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cerberus.UI", "Cerberus.UI\Cerberus.UI.csproj", "{C2060E17-C072-42B3-AF9C-884827218DCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cerberus.Logic", "Cerberus.Logic\Cerberus.Logic.csproj", "{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cerberus.CLI", "Cerberus.CLI\Cerberus.CLI.csproj", "{BD3937BD-742D-419E-B5F0-1F05F0B77A17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+		Ship|x86 = Ship|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2060E17-C072-42B3-AF9C-884827218DCE}.Debug|x86.ActiveCfg = Debug|x86
+		{C2060E17-C072-42B3-AF9C-884827218DCE}.Debug|x86.Build.0 = Debug|x86
+		{C2060E17-C072-42B3-AF9C-884827218DCE}.Release|x86.ActiveCfg = Release|x86
+		{C2060E17-C072-42B3-AF9C-884827218DCE}.Release|x86.Build.0 = Release|x86
+		{C2060E17-C072-42B3-AF9C-884827218DCE}.Ship|x86.ActiveCfg = Ship|x86
+		{C2060E17-C072-42B3-AF9C-884827218DCE}.Ship|x86.Build.0 = Ship|x86
+		{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}.Debug|x86.ActiveCfg = Debug|x86
+		{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}.Debug|x86.Build.0 = Debug|x86
+		{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}.Release|x86.ActiveCfg = Release|x86
+		{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}.Release|x86.Build.0 = Release|x86
+		{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}.Ship|x86.ActiveCfg = Ship|x86
+		{3655F8F1-FD9B-488F-B2B4-C3E0BD0891CB}.Ship|x86.Build.0 = Ship|x86
+		{BD3937BD-742D-419E-B5F0-1F05F0B77A17}.Debug|x86.ActiveCfg = Debug|x86
+		{BD3937BD-742D-419E-B5F0-1F05F0B77A17}.Debug|x86.Build.0 = Debug|x86
+		{BD3937BD-742D-419E-B5F0-1F05F0B77A17}.Release|x86.ActiveCfg = Release|x86
+		{BD3937BD-742D-419E-B5F0-1F05F0B77A17}.Release|x86.Build.0 = Release|x86
+		{BD3937BD-742D-419E-B5F0-1F05F0B77A17}.Ship|x86.ActiveCfg = Ship|x86
+		{BD3937BD-742D-419E-B5F0-1F05F0B77A17}.Ship|x86.Build.0 = Ship|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C6285C4-1EFD-4357-ACB9-A8DDBCEA92C8}
+	EndGlobalSection
+EndGlobal

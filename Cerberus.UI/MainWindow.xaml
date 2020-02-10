@@ -1,0 +1,278 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:WpfHexaEditor="clr-namespace:WpfHexaEditor;assembly=WPFHexaEditor"
+        x:Class="Cerberus.UI.MainWindow"
+        mc:Ignorable="d"
+        Title="Cerberus" Height="590" Width="1280" MinHeight="720" MinWidth="960" Background="#FF21252B" Closing="WindowClosing">
+    <Grid Background="#FF252526">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400" MinWidth="250" MaxWidth="800"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="121*"/>
+            <RowDefinition Height="120*"/>
+            <RowDefinition Height="27"/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#FF007ACC" Stroke="#FF007ACC" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <TabControl BorderThickness="0,2,0,0" BorderBrush="#FF007ACC" Background="#FF333333" Grid.Column="1" Margin="0,41,10,10" Grid.RowSpan="2">
+            <TabItem Header="Disassembly">
+                <Grid Background="#FF1E1E1E">
+                    <AvalonEdit:TextEditor ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" SyntaxHighlighting="GSC" x:Name="Disassembly" Background="#FF1E1E1E" Foreground="White"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Decompile">
+                <Grid Background="#FF1E1E1E">
+                    <AvalonEdit:TextEditor ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" SyntaxHighlighting="GSC" x:Name="Decompiler" Background="#FF1E1E1E" Foreground="White"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Hex">
+                <Grid Background="#FF1E1E1E">
+
+                    <WpfHexaEditor:HexEditor Name="HexView" Margin="87,28,103,19"/>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Strings">
+                <Grid Background="#FF1E1E1E">
+                    <ListView x:Name="StringList" BorderThickness="0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Offset" Width="96" DisplayMemberBinding="{Binding Offset}"/>
+                                <GridViewColumn Header="Length" Width="96" DisplayMemberBinding="{Binding Value.Length}"/>
+                                <GridViewColumn Header="References" Width="96" DisplayMemberBinding="{Binding References.Count}"/>
+                                <GridViewColumn Header="String" Width="192" DisplayMemberBinding="{Binding Value}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Imports">
+                <Grid Background="#FF1E1E1E">
+                    <ListView x:Name="ImportList" BorderThickness="0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="192" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Namespace" Width="192" DisplayMemberBinding="{Binding Namespace}"/>
+                                <GridViewColumn Header="References" Width="96" DisplayMemberBinding="{Binding References.Count}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Includes">
+                <Grid Background="#FF1E1E1E">
+                    <ListView x:Name="IncludeList" BorderThickness="0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="512"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Anim Trees">
+                <Grid Background="#FF1E1E1E">
+                    <ListView x:Name="AnimTreeList" BorderThickness="0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="300" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="References" Width="96" DisplayMemberBinding="{Binding References.Count}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Log">
+                <Grid Background="#FF1E1E1E">
+                    <AvalonEdit:TextEditor x:Name="Log" ShowLineNumbers="True" FontFamily="Consolas" FontSize="10pt" SyntaxHighlighting="None" Background="#FF1E1E1E" Foreground="White"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <!-- Scripts -->
+        <TabControl BorderThickness="0,2,0,0" BorderBrush="#FF007ACC" Background="#FF333333" Margin="10,41,5,4">
+            <TabItem Header="Scripts">
+                <Grid Background="#FF1E1E1E">
+                    <ListView AllowDrop="True" Drop="ScriptListDrop" x:Name="ScriptList" BorderThickness="0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding FileName}"/>
+                                <GridViewColumn Header="Size" Width="96" DisplayMemberBinding="{Binding DisplaySize}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <TabControl BorderThickness="0,2,0,0" BorderBrush="#FF007ACC" Background="#FF333333" Margin="10,5,5,10" Grid.Row="1">
+            <TabItem Header="Functions">
+                <Grid Background="#FF1E1E1E">
+                    <ListView x:Name="FunctionList" BorderThickness="0" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Name" Width="132" DisplayMemberBinding="{Binding Name}"/>
+                                <GridViewColumn Header="Namespace" Width="132" DisplayMemberBinding="{Binding Namespace}"/>
+                                <GridViewColumn Header="Parameters" Width="96" DisplayMemberBinding="{Binding ParameterCount}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <GridSplitter Width="5" Background="Transparent" Grid.RowSpan="3"/>
+        <ProgressBar x:Name="Progress" Grid.Row="2" BorderBrush="#FF00497A" Background="#FF00497A" Foreground="White" HorizontalAlignment="Left" Width="160"/>
+        <Label x:Name="ProgressLabel" VerticalContentAlignment="Top"  Content="Idle" Margin="160,0,0,0" Grid.Row="2" Foreground="White" Grid.ColumnSpan="2" FontSize="12"/>
+        <Rectangle Fill="#FF007ACC" Height="36" Stroke="#FF007ACC" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <!-- Open Files Button -->
+        <Button Style="{StaticResource SidebarButton}" HorizontalAlignment="Left"  Width="36" Click="LoadClick" Margin="36,0,0,0" Height="36" VerticalAlignment="Top">
+            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                <Canvas x:Name="Capa_1" Canvas.Left="0" Canvas.Top="0" Width="58" Height="58">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path2" Fill="#FFE0E0E0" StrokeThickness="0.76271188">
+                        <Path.Data>
+                            <PathGeometry Figures="M 42.213203 51.118644 H 8.0749827 c -0.7855932 0 -1.3568644 -0.745932 -1.1516949 -1.50483 L 14.677017 28.356271 c 0.140339 -0.520169 0.612457 -0.881695 1.151694 -0.881695 h 34.138221 c 0.785593 0 1.151695 0.750509 1.151695 1.504831 l -7.753729 21.257542 c -0.140339 0.52017 -0.612458 0.881695 -1.151695 0.881695 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path4" Fill="#FFF0F0F0" StrokeThickness="0.76271188">
+                        <Path.Data>
+                            <PathGeometry Figures="m 14.677017 28.356271 c 0.140339 -0.520169 0.612457 -0.881695 1.151694 -0.881695 H 41.966084 V 18.322034 L 30.525406 6.8813559 H 12.983034 V 33.000424 Z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Canvas x:Name="g10">
+                        <Canvas.RenderTransform>
+                            <MatrixTransform Matrix="0.76271186 0 0 0.76271186 6.8813386 6.8813559"/>
+                        </Canvas.RenderTransform>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path6" Fill="#FFFFFFFF">
+                            <Path.Data>
+                                <PathGeometry Figures="M 50.268 18 H 46 v 9 h 6 V 19.732 C 52 18.775 51.224 18 50.268 18 Z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path8" Fill="#FFFFFFFF">
+                            <Path.Data>
+                                <PathGeometry Figures="M 8 11 H 1.732 C 0.776 11 0 11.775 0 12.732 V 55.46 c 0.069 0.002 0.138 0.006 0.205 0.01 L 8 34.212 Z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path12" Fill="#FF007ACC" StrokeThickness="0.76271188">
+                        <Path.Data>
+                            <PathGeometry Figures="m 25.949135 19.084746 h -7.627118 c -0.421017 0 -0.762712 -0.340932 -0.762712 -0.762712 0 -0.42178 0.341695 -0.762712 0.762712 -0.762712 h 7.627118 c 0.421017 0 0.762712 0.340932 0.762712 0.762712 0 0.42178 -0.341695 0.762712 -0.762712 0.762712 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path14" Fill="#FF007ACC" StrokeThickness="0.76271188">
+                        <Path.Data>
+                            <PathGeometry Figures="m 25.949135 13.745763 h -7.627118 c -0.421017 0 -0.762712 -0.340932 -0.762712 -0.762712 0 -0.42178 0.341695 -0.762712 0.762712 -0.762712 h 7.627118 c 0.421017 0 0.762712 0.340932 0.762712 0.762712 0 0.42178 -0.341695 0.762712 -0.762712 0.762712 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" x:Name="path16" Fill="#FF007ACC" StrokeThickness="0.76271188">
+                        <Path.Data>
+                            <PathGeometry Figures="M 36.627101 24.423729 H 18.322017 c -0.421017 0 -0.762712 -0.340932 -0.762712 -0.762712 0 -0.42178 0.341695 -0.762712 0.762712 -0.762712 h 18.305084 c 0.421017 0 0.762712 0.340932 0.762712 0.762712 0 0.42178 -0.341695 0.762712 -0.762712 0.762712 z" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                    <Polygon xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="46,15 31,0 31,15" x:Name="polygon18" FillRule="NonZero" Fill="#FFBBBBBB">
+                        <Polygon.RenderTransform>
+                            <MatrixTransform Matrix="0.76271186 0 0 0.76271186 6.8813386 6.8813559"/>
+                        </Polygon.RenderTransform>
+                    </Polygon>
+                </Canvas>
+            </Viewbox>
+        </Button>
+        <!-- Open Files Button -->
+        <Button Style="{StaticResource SidebarButton}" MouseDoubleClick="AbortDoubleClick" HorizontalAlignment="Left"  Width="36" Click="AbortClick"  Margin="108,0,0,0" Height="36" VerticalAlignment="Top">
+            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                <Canvas Canvas.Left="0" Canvas.Top="0" Width="50" Height="50">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <Ellipse xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="7" Canvas.Top="7" Width="36" Height="36" x:Name="circle2" Fill="#FFFFFFFF" StrokeThickness="0.720339"/>
+                    <Polyline xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="16,34 25,25 34,16" x:Name="polyline4" FillRule="NonZero" StrokeThickness="2" Stroke="#FF007ACC" StrokeMiterLimit="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Polyline.RenderTransform>
+                            <MatrixTransform Matrix="0.72033898 0 0 0.72033898 6.9915254 6.9915254"/>
+                        </Polyline.RenderTransform>
+                    </Polyline>
+                    <Polyline xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Points="16,16 25,25 34,34" x:Name="polyline6" FillRule="NonZero" StrokeThickness="2" Stroke="#FF007ACC" StrokeMiterLimit="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Polyline.RenderTransform>
+                            <MatrixTransform Matrix="0.72033898 0 0 0.72033898 6.9915254 6.9915254"/>
+                        </Polyline.RenderTransform>
+                    </Polyline>
+                </Canvas>
+            </Viewbox>
+        </Button>
+        <!-- Cerberus Icon -->
+        <Button Style="{StaticResource SidebarButton}" HorizontalAlignment="Left" Width="36" Height="36" VerticalAlignment="Top" Click="CerberusClick">
+            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                <Canvas x:Name="svg8" Width="512.000000" Height="512.000000">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <!--Unknown tag: sodipodi:namedview-->
+                    <!--Unknown tag: metadata-->
+                    <Canvas x:Name="g6">
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.100000" ScaleY="-0.100000"/>
+                                <TranslateTransform X="0.000000" Y="512.000000"/>
+                            </TransformGroup>
+                        </Canvas.RenderTransform>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FFFFFFFF">
+                            <Path.Data>
+                                <PathGeometry Figures="M2148 4257 c-45 -102 -97 -254 -118 -346 -69 -293 -72 -319 -67 -471 4 -126 9 -157 34 -235 16 -49 48 -120 71 -157 82 -134 145 -287 213 -521 55 -190 139 -256 312 -245 85 5 165 42 202 93 12 16 52 122 90 235 37 113 72 212 77 220 12 20 15 29 -68 -225 -67 -204 -70 -211 -119 -261 -40 -40 -62 -54 -111 -67 -150 -42 -303 2 -369 107 -7 12 -49 129 -94 262 -75 225 -107 304 -123 304 -3 0 -23 -51 -43 -114 -20 -63 -76 -195 -125 -293 -48 -98 -93 -197 -100 -219 -8 -28 -11 -85 -8 -175 5 -123 8 -144 46 -262 45 -137 119 -307 200 -455 28 -51 47 -90 42 -87 -5 3 -44 72 -86 152 -241 458 -284 748 -146 994 39 68 112 244 137 327 l18 62 -79 83 c-43 45 -98 103 -120 128 -90 100 -228 188 -379 240 -59 20 -61 22 -104 99 -44 81 -118 177 -200 263 -49 52 -170 152 -175 146 -2 -2 -11 -38 -21 -79 -10 -41 -21 -79 -25 -83 -4 -5 -21 -2 -36 6 -62 31 -304 74 -304 53 0 -8 89 -155 149 -248 l60 -99 -58 -49 c-131 -110 -217 -246 -247 -394 -24 -119 -43 -146 -170 -240 -120 -89 -304 -259 -304 -281 0 -31 132 -132 235 -180 161 -74 276 -70 455 18 136 66 177 78 267 78 66 0 77 -3 100 -26 l25 -26 -7 -146 c-11 -247 18 -323 199 -519 182 -196 291 -349 396 -555 35 -69 58 -102 78 -112 125 -65 403 -142 592 -166 121 -14 359 -12 472 5 143 21 310 62 418 101 177 65 166 57 217 158 113 226 225 383 414 582 166 174 196 256 185 501 l-7 153 25 25 c22 22 34 25 98 25 91 0 130 -11 243 -66 50 -24 109 -50 133 -58 64 -23 161 -30 223 -17 123 27 351 168 357 222 3 23 -13 41 -110 127 -62 55 -151 130 -198 167 -107 85 -133 125 -160 244 -32 143 -74 216 -200 342 l-105 107 36 53 c68 101 146 225 164 258 l17 34 -74 -6 c-45 -3 -116 -19 -176 -39 l-101 -34 -10 41 c-6 22 -15 59 -21 83 -6 23 -16 42 -23 42 -19 0 -185 -158 -248 -237 -31 -37 -73 -97 -94 -133 -63 -107 -66 -110 -145 -141 -41 -16 -79 -29 -84 -29 -5 0 -45 -23 -90 -50 -90 -56 -148 -108 -283 -255 -50 -55 -94 -103 -97 -106 -13 -13 98 -306 148 -392 36 -61 73 -165 86 -240 28 -158 -41 -416 -183 -687 -129 -246 -237 -409 -342 -515 -27 -28 -34 -33 -14 -11 179 203 380 575 459 848 73 255 66 352 -39 563 -95 192 -144 305 -172 402 -13 46 -28 83 -32 83 -4 0 -18 -23 -29 -50 -11 -28 -23 -49 -25 -46 -7 7 44 110 89 181 68 106 86 145 108 244 37 167 20 370 -55 653 -35 133 -121 367 -140 380 -5 4 -15 -18 -22 -54 -46 -227 -159 -397 -311 -470 l-64 -30 -51 21 c-67 28 -149 92 -192 150 -57 78 -110 201 -130 300 -10 50 -21 91 -24 91 -3 0 -18 -29 -33 -63z m222 -1013 c28 -59 50 -110 50 -115 0 -20 -41 -18 -74 3 -43 28 -53 51 -61 146 -7 69 -6 72 14 72 17 0 31 -20 71 -106z m475 96 c11 -17 -16 -164 -33 -184 -10 -10 -30 -25 -46 -33 -25 -13 -30 -13 -44 1 -14 13 -10 26 36 120 48 99 70 123 87 96z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Viewbox>
+        </Button>
+        <!-- Open Folder Button -->
+        <Button Style="{StaticResource SidebarButton}" Click="AboutButtonClick" Grid.Column="1" Height="36" VerticalAlignment="Top" HorizontalAlignment="Right" Width="36">
+            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                <Canvas Canvas.Left="0" Canvas.Top="0" Width="50" Height="50">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <Ellipse xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Canvas.Left="7" Canvas.Top="7" Width="36" Height="36" Fill="#FFFFFFFF" StrokeThickness="0.720339"/>
+                    <Line xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" X1="25" Y1="33.64407" X2="25" Y2="35.084747" x:Name="line4" StrokeThickness="1.440678" Stroke="#FF007ACC" StrokeMiterLimit="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round"/>
+                    <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" StrokeThickness="1.440678" Stroke="#FF007ACC" StrokeMiterLimit="10" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                        <Path.Data>
+                            <PathGeometry Figures="m 19.957627 18.516949 c 0 -2.808602 2.296441 -5.081271 5.114407 -5.041652 2.6775 0.03746 4.932881 2.292118 4.970339 4.970339 0.02521 1.808771 -0.901865 3.402161 -2.312288 4.311949 C 25.976059 23.888517 25 25.908347 25 27.995169 v 2.047204" FillRule="NonZero"/>
+                        </Path.Data>
+                    </Path>
+                </Canvas>
+            </Viewbox>
+        </Button>
+        <Button Style="{StaticResource SidebarButton}" HorizontalAlignment="Left"  Width="36" Click="SaveClick"  Margin="72,0,0,0" Height="36" VerticalAlignment="Top">
+            <Viewbox xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Stretch="Uniform">
+                <Canvas x:Name="svg10" Width="512.000000" Height="512.000000">
+                    <Canvas.RenderTransform>
+                        <TranslateTransform X="0" Y="0"/>
+                    </Canvas.RenderTransform>
+                    <!--Unknown tag: sodipodi:namedview-->
+                    <!--Unknown tag: metadata-->
+                    <Canvas x:Name="g8">
+                        <Canvas.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="0.100000" ScaleY="-0.100000"/>
+                                <TranslateTransform X="0.000000" Y="512.000000"/>
+                            </TransformGroup>
+                        </Canvas.RenderTransform>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FFFFFFFF">
+                            <Path.Data>
+                                <PathGeometry Figures="M750 2555 l0 -1845 1810 0 1810 0 0 1523 0 1522 -323 323 -322 322 -1488 0 -1487 0 0 -1845z m2715 1090 l0 -600 -980 0 -980 0 -3 590 c-1 325 0 596 3 603 3 10 205 12 982 10 l978 -3 0 -600z m225 -1995 l0 -790 -1167 2 -1168 3 -3 788 -2 787 1170 0 1170 0 0 -790z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                        <Path xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Fill="#FFFFFFFF">
+                            <Path.Data>
+                                <PathGeometry Figures="M2790 3645 l0 -375 225 0 225 0 0 375 0 375 -225 0 -225 0 0 -375z" FillRule="NonZero"/>
+                            </Path.Data>
+                        </Path>
+                    </Canvas>
+                </Canvas>
+            </Viewbox>
+        </Button>
+    </Grid>
+</Window>
