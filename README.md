@@ -36,8 +36,6 @@ As with any decompiler there are limitions to the output Cerberus provides.
 
 * Some for loops may not be properly marked, or detected, but this is rare.
 
-* Custom GSCs compiled using Black Ops III's Mod Tools are not supported. This is a decision that will remain forever as we all know how that would end up.
-
 * Starting with Black Ops III they've started hashing almost everything, including notifies, etc. so some data will output as var_\<hash\>, etc. if it's not found in the name database.
 
 * Black Ops III also introduced "debug strings". Any strings within dev blocks will output as "Dev block strings are not support".
